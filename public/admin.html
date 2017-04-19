@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <title>Project SAM</title>
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/public/assets/css/base.css">
+    <link rel="stylesheet" href="/public/assets/css/admin-head.css">
+    <link rel="stylesheet" href="/public/assets/css/admin-body.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/public/assets/js/admin.js"></script>
+</head>
+<body>
+	<div id="header">
+		<h1 id="header-logo">
+			Project SAM
+		</h1>
+		<div id="header-login-link">
+			admin_user@brown.edu | <a href="login.html">logout</a>
+		</div>
+	</div>	
+	<div id="content">
+		<div class="survey-data">
+			<h2>
+				Screening Survey
+			</h2>
+			<a href="admin.html" class="details-link">
+				see details
+			</a>
+			<canvas id="screeningChart" width="250" height="250"></canvas>
+			<p>
+				137 complete<br/>
+				100 invited
+			</p>
+		</div>
+		<div class="survey-data">
+			<h2>
+				Consent Form
+			</h2>
+			<a href="admin.html" class="details-link">
+				see details
+			</a>
+			<canvas id="consentChart" width="250" height="250"></canvas>
+			<p>
+				80 complete<br/>
+				20 incomplete
+			</p>
+			<a href="admin.html" class="reminder-button">
+				send mass reminder message
+			</a>
+		</div>
+		<div class="survey-data">
+			<h2>
+				Main Survey
+			</h2>
+			<a href="admin.html" class="details-link">
+				see details
+			</a>
+			<canvas id="mainSurveyChart" width="250" height="250"></canvas>
+			<p>
+				55 complete<br/>
+				30 incomplete
+			</p>
+			<a href="admin.html" class="reminder-button">
+				send mass reminder message
+			</a>
+		</div>
+	</div>
+	<div id="footer">
+	</div>
+</body>
+</html>

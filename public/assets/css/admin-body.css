@@ -1,0 +1,39 @@
+#content {
+	margin-top: 100px;
+}
+
+.survey-data {
+	width: 300px;
+	display: inline-block;
+	vertical-align: top;
+	margin: 0px 80px;
+}
+
+.survey-data h2, .details-link {
+	text-align: center;
+}
+
+.details-link {
+	display: block;
+	color: #6DB1A5;
+	text-decoration: none;
+}
+
+.survey-data p {
+	margin-left: 50px;
+}
+
+.reminder-button {
+	display: block;
+	color: #FFFFFF;
+	background-color: #4A514B;
+	padding: 10px;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 10px;
+}
+
+canvas {
+	display: block;
+	margin: 30px 25px 0px 25px;
+}

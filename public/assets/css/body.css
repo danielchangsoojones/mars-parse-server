@@ -1,0 +1,31 @@
+body {
+	background-color: #6DB1A5;
+}
+
+/* CONTENT */
+#content {
+	max-width: 700px;
+	margin: 50px auto;
+	padding: 0px 20px;
+}
+
+#content h2 {
+	color: #FFFFFF;
+}
+
+/* FORMS */
+.form-item {
+	margin-top: 20px;
+}
+
+.form-field {
+	height: 30px;
+	width: 350px;
+	max-width: 100%;
+	font-size: 18pt;
+	border-radius: 5px;
+}
+
+.form-error {
+	color: #FFFFFF;
+}
