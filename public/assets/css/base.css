@@ -1,0 +1,63 @@
+html {
+	height: 100%;
+}
+
+body {
+	margin: 0px;
+	height: 100%;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14pt;
+}
+
+h1, h2, h3 {
+	font-family: 'Oswald', sans-serif;
+}
+
+h2 {
+	font-weight: 300;
+	font-size: 24pt;
+	margin: 0px;
+}
+
+/* HEADER */
+#header {
+	height: 100px;
+	position: relative;
+}
+
+#header-logo {
+	line-height: 100px;
+	margin: 0px;
+	font-size: 30pt;
+	position: absolute;
+	left: 40px;
+}
+
+#header-login-link {
+	line-height: 100px;
+	position: absolute;
+	right: 40px;
+}
+
+#header-login-link a {
+	text-decoration: none;
+}
+
+/* CONTENT */
+.arrow-button {
+	height: 34px;
+	width: 43px;
+	vertical-align: top;
+	margin-left: 10px;
+	background: url(/public/assets/images/arrow.png) transparent;
+	border: none;
+	cursor: pointer;
+}
+
+/* FOOTER */
+#footer {
+	position: absolute;
+	bottom: 0px;
+	height: 50px;
+	width: 100%;
+}

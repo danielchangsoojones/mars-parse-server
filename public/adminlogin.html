@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <title>Project SAM</title>
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/public/assets/css/base.css">
+    <link rel="stylesheet" href="/public/assets/css/admin-head.css">
+    <link rel="stylesheet" href="/public/assets/css/body.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/public/assets/js/login.js"></script>
+</head>
+<body>
+	<div id="header">
+		<h1 id="header-logo">
+			Project SAM
+		</h1>
+		<div id="header-login-link">
+			<a href="login.html">login</a>
+		</div>
+	</div>	
+	<div id="content">
+		<h2>
+			Administrative Portal
+		</h2>
+		<form id="register-form" action="admin.html">
+			<div class="form-item">
+				username<br/>
+				<input type="text" name="email" class="form-field" id="email-field"></input>
+				<div class="form-error" id="email-error"></div>
+			</div>
+			<div class="form-item">
+				confirm password<br/>
+				<input type="password" name="password" class="form-field" id="password-field"></input>
+				<input type="submit" class="arrow-button" value=""></input>
+				<div class="form-error" id="password-error"></div>
+			</div>
+		</form>
+	</div>
+	<div id="footer">
+	</div>
+</body>
+</html>

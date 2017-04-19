@@ -45,6 +45,30 @@ app.get('/test', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/test.html'));
 });
 
+app.get('/landing', function(req, res) {
+  res.sendFile(path.join(__dirname, '/public/landing.html'));
+});
+
+app.get('/welcome', function(req, res) {
+  res.sendFile(path.join(__dirname, '/public/welcome.html'));
+});
+
+app.get('/login', function(req, res) {
+  res.sendFile(path.join(__dirname, '/public/login.html'));
+});
+
+app.get('/register', function(req, res) {
+  res.sendFile(path.join(__dirname, '/public/register.html'));
+});
+
+app.get('/admin', function(req, res) {
+  res.sendFile(path.join(__dirname, '/public/admin.html'));
+});
+
+app.get('/adminlogin', function(req, res) {
+  res.sendFile(path.join(__dirname, '/public/adminlogin.html'));
+});
+
 var port = process.env.PORT || 1337;
 var httpServer = require('http').createServer(app);
 httpServer.listen(port, function() {
