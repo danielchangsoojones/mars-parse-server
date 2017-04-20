@@ -1,4 +1,5 @@
 Parse.Cloud.define('signUp', function(req, res) {
+	console.log('why');
     var email = req.params.email;
     var password = req.params.password;
     
