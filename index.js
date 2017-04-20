@@ -53,6 +53,12 @@ app.get('/login', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/login.html'));
 });
 
+app.post('/login', function(req, res) {
+  Parse.Cloud.run('logIn', {email: req.body.email, password: req.body.password}).then(function(loginResponse) {
+    res.redirect('/welcome');
+  });
+});
+
 app.get('/register', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/register.html'));
 });
