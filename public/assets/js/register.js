@@ -12,8 +12,10 @@ $(document).ready(function(){
 
 function validateEmail() {
 	var email = $('#email-field').val();
-	var regex = /^.*@.*\.edu$/;
-	if(email.match(regex)) {
+	var regex1 = /^.*@rutgers.edu$/;
+	var regex2 = /^.*@uw.edu$/;
+	var regex3 = /^.*@uri.edu$/;
+	if(email.match(regex1) || email.match(regex2) || email.match(regex3)) {
 		$('#email-error').html("");
 		return true;
 	}
