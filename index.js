@@ -60,7 +60,7 @@ app.get('/adminlogin', function(req, res) {
 });
 
 app.post('/signup', function(req, res) {
-  console.log("???");
+  res.send("???");
   Parse.Cloud.run('signUp', req).then(function(signupRes) {
     console.log(signupRes);
 	res.redirect('https://brown.co1.qualtrics.com/jfe/form/SV_6KeyGldHYVWIKln');
