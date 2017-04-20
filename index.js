@@ -60,10 +60,25 @@ app.get('/adminlogin', function(req, res) {
 });
 
 app.post('/signup', function(req, res) {
-  Parse.Cloud.run('signUp', req).then(function(signupRes) {
-    console.log(signupRes);
-	res.redirect('https://brown.co1.qualtrics.com/jfe/form/SV_6KeyGldHYVWIKln');
-  });
+	var email = req.params.email;
+    var password = req.params.password;
+    
+    var user = new Parse.User();
+    user.set("username", email);
+    user.set("password", password);
+    user.set("email", email);
+
+    user.signUp(null, {
+        success: function(user) {
+        // Hooray! Let them use the app now.
+        console.log("yay, they signed up");
+        res.redirect('https://brown.co1.qualtrics.com/jfe/form/SV_6KeyGldHYVWIKln');
+    },
+        error: function(user, error) {
+        // Show the error message somewhere and let the user try again.
+        res.status(500).send("Error: " + error.code + " " + error.message);
+    }
+    });
 });
 
 var port = process.env.PORT || 1337;
