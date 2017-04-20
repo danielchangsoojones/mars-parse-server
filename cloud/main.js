@@ -19,3 +19,19 @@ Parse.Cloud.define('signUp', function(req, res) {
     }
     });
 });
+
+Parse.Cloud.define('logIn', function(req, res) {
+    var email = req.params.email;
+    var password = req.params.password;
+    
+    Parse.User.logIn(email, password, {
+        success: function(user) {
+        // Do stuff after successful login.
+            res.success(user);
+        },
+        error: function(user, error) {
+        // The login failed. Check error to see why.
+            res.error("Error: " + error.code + " " + error.message);
+        }
+    });
+});
