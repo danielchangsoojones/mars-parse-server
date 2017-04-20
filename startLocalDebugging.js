@@ -13,7 +13,7 @@ process.nextTick(function () {
     require('./cloud/main.js');
     console.log("starting local debugging");
     
-        Parse.Cloud.run("signUp", {email: "hi@gmail.com", password: "password"}, {
+        Parse.Cloud.run("adminLogIn", {email: "kerri_hayes@brown.edu", password: "projectmars"}, {
                         success: function (result) {
                             console.log("success");
                             console.log(result);

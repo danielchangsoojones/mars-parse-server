@@ -36,3 +36,16 @@ Parse.Cloud.define('logIn', function(req, res) {
         }
     });
 });
+
+Parse.Cloud.define('adminLogIn', function(req, res) {
+    Parse.User.logIn("kerri_hayes@brown.edu", "projectmars", {
+        success: function(user) {
+        // Do stuff after successful login.
+            res.success(user);
+        },
+        error: function(user, error) {
+        // The login failed. Check error to see why.
+            res.error("Error: " + error.code + " " + error.message);
+        }
+    });
+});
