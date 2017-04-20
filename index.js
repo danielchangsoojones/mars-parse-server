@@ -45,7 +45,7 @@ app.get('/test', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/test.html'));
 });
 
-app.get('/landing', function(req, res) {
+app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/landing.html'));
 });
 
