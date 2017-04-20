@@ -4,6 +4,7 @@
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
+var bodyParser = require('body-parser')
 
 var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
 
@@ -26,6 +27,11 @@ var api = new ParseServer({
 // javascriptKey, restAPIKey, dotNetKey, clientKey
 
 var app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+})); 
 
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
@@ -60,9 +66,8 @@ app.get('/adminlogin', function(req, res) {
 });
 
 app.post('/signup', function(req, res) {
-  Parse.Cloud.run('signUp', req).then(function(signupRes) {
-    console.log(signupRes);
-	res.redirect('https://brown.co1.qualtrics.com/jfe/form/SV_6KeyGldHYVWIKln');
+  Parse.Cloud.run('signUp', {email: req.body.email, password: req.body.password}).then(function(signupResponse) {
+    res.redirect('https://brown.co1.qualtrics.com/jfe/form/SV_6KeyGldHYVWIKln');
   });
 });
 
