@@ -12,7 +12,7 @@ $(document).ready(function(){
 
 function validateEmail() {
 	var email = $('#email-field').val();
-	var regex = /^.*@bronw.edu$/;
+	var regex = /^.*@.*\.edu$/;
 	if(email.match(regex)) {
 		$('#email-error').html("");
 		return true;
