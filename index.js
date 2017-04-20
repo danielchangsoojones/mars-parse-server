@@ -59,6 +59,14 @@ app.get('/adminlogin', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/adminlogin.html'));
 });
 
+app.post('/signup', function(req, res) {
+  res.send("???");
+  Parse.Cloud.run('signUp', req).then(function(signupRes) {
+    console.log(signupRes);
+	res.redirect('https://brown.co1.qualtrics.com/jfe/form/SV_6KeyGldHYVWIKln');
+  });
+});
+
 var port = process.env.PORT || 1337;
 var httpServer = require('http').createServer(app);
 httpServer.listen(port, function() {
