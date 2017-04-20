@@ -15,8 +15,6 @@ function validateEmail() {
 	var regex = /^.*@.*\.edu$/;
 	if(email.match(regex)) {
 		$('#email-error').html("");
-		console.log("hello");
-
 		return true;
 	}
 	$('#email-error').html("Invalid address. Please use the email from your university.");
