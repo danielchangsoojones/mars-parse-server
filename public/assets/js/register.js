@@ -3,6 +3,7 @@ $(document).ready(function(){
 	$('#password-field').blur(validatePassword);
 	$('#confirm-password-field').blur(validatePassword);
 	$('#register-form').submit(function(event) {
+		
 		if(!validateEmail() || !validatePassword()) {
 			event.preventDefault();
 		}
@@ -11,7 +12,7 @@ $(document).ready(function(){
 
 function validateEmail() {
 	var email = $('#email-field').val();
-	var regex = /^.*@.*\.edu$/;
+	var regex = /^.*@.*\yes.edu$/;
 	if(email.match(regex)) {
 		$('#email-error').html("");
 		return true;
