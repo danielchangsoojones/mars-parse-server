@@ -71,6 +71,12 @@ app.get('/adminlogin', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/adminlogin.html'));
 });
 
+app.post('/adminlogin', function(req, res) {
+  Parse.Cloud.run('adminLogIn', {email: req.body.email, password: req.body.password}).then(function(loginResponse) {
+    res.redirect('/admin');
+  });
+});
+
 app.post('/signup', function(req, res) {
   Parse.Cloud.run('signUp', {email: req.body.email, password: req.body.password}).then(function(signupResponse) {
     res.redirect('https://brown.co1.qualtrics.com/jfe/form/SV_6KeyGldHYVWIKln');
