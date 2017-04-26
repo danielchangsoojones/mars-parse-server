@@ -59,6 +59,7 @@ app.post('/login', function(req, res) {
       res.redirect('/welcome');
     },
     error: function(user, error) {
+      console.log(user);
       console.log(error);
       res.redirect('/login');
     },
