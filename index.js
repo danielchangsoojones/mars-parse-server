@@ -58,8 +58,7 @@ app.post('/login', function(req, res) {
     success: function(user) {
       res.redirect('/welcome');
     },
-    error: function(user, error) {
-      console.log(user);
+    error: function(error) {
       console.log(error);
       res.redirect('/login');
     },
@@ -83,7 +82,7 @@ app.post('/adminlogin', function(req, res) {
     success: function(user) {
       res.redirect('/admin');
     },
-    error: function(user, error) {
+    error: function(error) {
       console.log(error);
       res.redirect('/adminlogin');
     },

@@ -16,7 +16,7 @@ Parse.Cloud.define('signUp', function(req, res) {
     },
         error: function(user, error) {
         // Show the error message somewhere and let the user try again.
-        res.error("Error: " + error.code + " " + error.message);
+        res.error("Error: " + error.message);
     }
     });
 });
@@ -32,7 +32,7 @@ Parse.Cloud.define('logIn', function(req, res) {
         },
         error: function(user, error) {
         // The login failed. Check error to see why.
-            res.error("Error: " + error.code + " " + error.message);
+            res.error("Error: " + error.message);
         }
     });
 });
@@ -49,7 +49,7 @@ Parse.Cloud.define('adminLogIn', function(req, res) {
             },
             error: function(user, error) {
             // The login failed. Check error to see why.
-            res.error("Error: " + error.code + " " + error.message);
+            res.error("Error: " + error.message);
             }
             });
     } else {
