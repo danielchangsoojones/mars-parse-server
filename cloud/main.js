@@ -50,7 +50,9 @@ Parse.Cloud.define('adminLogIn', function(req, res) {
             error: function(user, error) {
             // The login failed. Check error to see why.
             res.error("Error: " + error.code + " " + error.message);
-        }
-    });
+            }
+            });
+    } else {
+	    res.error("Error: invalid login");
     }
 });
