@@ -1,5 +1,4 @@
 Parse.Cloud.define('signUp', function(req, res) {
-	console.log('why');
     var email = req.params.email;
     var password = req.params.password;
     
@@ -10,14 +9,13 @@ Parse.Cloud.define('signUp', function(req, res) {
 
     user.signUp(null, {
         success: function(user) {
-        // Hooray! Let them use the app now.
-        res.success(user);
-        console.log("yay, they signed up");
-    },
-        error: function(user, error) {
-        // Show the error message somewhere and let the user try again.
-        res.error("Error: " + error.message);
-    }
+        	// Hooray! Let them use the app now.
+        	res.success(user);
+        },
+        	error: function(user, error) {
+	        // Show the error message somewhere and let the user try again.
+	        res.error("Error: " + error.message);
+	    }
     });
 });
 

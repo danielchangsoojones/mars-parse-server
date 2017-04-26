@@ -90,8 +90,14 @@ app.post('/adminlogin', function(req, res) {
 });
 
 app.post('/signup', function(req, res) {
-  Parse.Cloud.run('signUp', {email: req.body.email, password: req.body.password}).then(function(signupResponse) {
-    res.redirect('https://brown.co1.qualtrics.com/jfe/form/SV_6KeyGldHYVWIKln');
+  Parse.Cloud.run('signUp', {email: req.body.email, password: req.body.password}, {
+    success: function(user) {
+      res.redirect('https://brown.co1.qualtrics.com/jfe/form/SV_6KeyGldHYVWIKln');
+    },
+    error: function(error) {
+      console.log(error);
+      res.redirect('/register');
+    },
   });
 });
 
