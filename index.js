@@ -56,6 +56,7 @@ app.get('/login', function(req, res) {
 app.post('/login', function(req, res) {
   Parse.Cloud.run('logIn', {email: req.body.email, password: req.body.password}, {
     success: function(user) {
+      console.log(req.session);
       res.redirect('/welcome');
     },
     error: function(error) {
