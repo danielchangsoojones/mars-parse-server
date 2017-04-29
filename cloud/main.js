@@ -10,6 +10,7 @@ Parse.Cloud.define('signUp', function(req, res) {
     user.signUp(null, {
         success: function(user) {
         	// Hooray! Let them use the app now.
+        	console.log(user.getSessionToken());
         	res.success(user);
         },
         	error: function(user, error) {
