@@ -4,7 +4,8 @@
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+var session = require('express-session');
 
 var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
 
@@ -31,7 +32,12 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
-})); 
+}));
+
+app.use(session({
+  secret: '??????????',
+  cookie: { }
+}))
 
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
@@ -56,6 +62,8 @@ app.get('/login', function(req, res) {
 app.post('/login', function(req, res) {
   Parse.Cloud.run('logIn', {email: req.body.email, password: req.body.password}, {
     success: function(user) {
+      console.log(req.session);
+      req.session.user = user;
       console.log(req.session);
       res.redirect('/welcome');
     },
