@@ -59,7 +59,7 @@ app.use(mountPath, api);
 
 function isLoggedIn(req, res, next) {
   unirest.get('/parse/users/me').headers({
-    'X-Parse-Application-Id': env.getApplicationId(),
+    'X-Parse-Application-Id': process.env.APP_ID || 'myAppId',
     'X-Parse-Session-Token': req.session.token
   }).send({}).end(function(userData) {
     if (userData.status == 200) {
