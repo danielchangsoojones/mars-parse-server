@@ -61,14 +61,14 @@ function isLoggedIn(req, res, next) {
   unirest.get(env.getParseURL() + '/users/me').headers({
     'X-Parse-Application-Id': env.getApplicationId(),
     'X-Parse-Session-Token': req.session.token
-  }).send({}).end((userData) => {
+  }).send({}).end(function(userData) {
     if (userData.status == 200) {
       req.user = Parse.Object.fromJSON(userData.body);
       console.log("did it work?");
       console.log(req.user);
       next();
     }
-  }
+  });
 }
 
 app.get('/', function(req, res) {
