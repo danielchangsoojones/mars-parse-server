@@ -69,6 +69,8 @@ function isLoggedIn(req, res, next) {
       console.log("did it work?");
       console.log(req.user);
       next();
+    } else {
+	  console.log(userData);
     }
   });
 }
