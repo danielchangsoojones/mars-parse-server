@@ -62,7 +62,7 @@ app.get('/', function(req, res) {
 
 app.get('/welcome', function(req, res) {
   console.log("test:");
-  console.log(req.session.user);
+  console.log(req.session.token);
   res.sendFile(path.join(__dirname, '/public/welcome.html'));
 });
 
@@ -73,8 +73,7 @@ app.get('/login', function(req, res) {
 app.post('/login', function(req, res) {
   Parse.Cloud.run('logIn', {email: req.body.email, password: req.body.password}, {
     success: function(user) {
-      console.log(req);
-      req.session.user = user;
+      req.session.token = user.getSessionToken();
       res.redirect('/welcome');
     },
     error: function(error) {
