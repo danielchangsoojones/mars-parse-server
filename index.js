@@ -75,7 +75,7 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/landing.html'));
 });
 
-app.get('/welcome', function(req, res) {
+app.get('/welcome', isLoggedIn, function(req, res) {
   console.log("test:");
   console.log(req.session.token);
   res.sendFile(path.join(__dirname, '/public/welcome.html'));
