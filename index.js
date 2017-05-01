@@ -6,6 +6,7 @@ var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var MongoDBStore = require('connect-mongodb-session')(session);
 
 var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
 
@@ -34,10 +35,18 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+var store = new MongoDBStore({
+  uri: 'mongodb://localhost:27017/dev',
+  collection: 'sessions'
+});
+
 app.use(session({
   secret: '??????????',
-  cookie: { }
-}))
+  cookie: {},
+  store: store,
+  resave: true,
+  saveUninitialized: true
+}));
 
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
@@ -53,7 +62,7 @@ app.get('/', function(req, res) {
 
 app.get('/welcome', function(req, res) {
   console.log("test:");
-  console.log(req.session);
+  console.log(req.session.user);
   res.sendFile(path.join(__dirname, '/public/welcome.html'));
 });
 
