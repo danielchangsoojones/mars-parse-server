@@ -58,7 +58,7 @@ app.use(mountPath, api);
 
 
 function isLoggedIn(req, res, next) {
-  unirest.get(env.getParseURL() + '/users/me').headers({
+  unirest.get(process.env.getParseURL() + '/users/me').headers({
     'X-Parse-Application-Id': env.getApplicationId(),
     'X-Parse-Session-Token': req.session.token
   }).send({}).end(function(userData) {
