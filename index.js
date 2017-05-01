@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 var store = new MongoDBStore({
-  uri: 'mongodb://localhost:27017/dev',
+  uri: databaseUri || 'mongodb://localhost:27017/dev',
   collection: 'sessions'
 });
 
