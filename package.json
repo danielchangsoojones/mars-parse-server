@@ -15,7 +15,8 @@
     "parse-server": "*",
     "body-parser": "*",
     "express-session": "*",
-    "connect-mongodb-session": "*"
+    "connect-mongodb-session": "*",
+    "unirest": "*"
   },
   "scripts": {
     "start": "node index.js"
