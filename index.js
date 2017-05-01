@@ -59,7 +59,9 @@ app.use(mountPath, api);
 
 function isLoggedIn(req, res, next) {
   console.log("???");
-  unirest.get('https://api.parse.com/1/users/me').headers({
+  var serverurl = process.env.SERVER_URL || 'http://localhost:1337/parse';
+  console.log(serverurl);
+  unirest.get(serverurl + '/users/me').headers({
     'X-Parse-Application-Id': process.env.APP_ID || 'myAppId',
     'X-Parse-Session-Token': req.session.token,
     'X-Parse-REST-API-Key': process.env.MASTER_KEY || 'Fhr8Q9SD^wSfe'
