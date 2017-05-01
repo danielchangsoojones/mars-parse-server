@@ -58,9 +58,7 @@ app.use(mountPath, api);
 
 
 function isLoggedIn(req, res, next) {
-  console.log("???");
   var serverurl = process.env.SERVER_URL || 'http://localhost:1337/parse';
-  console.log(serverurl);
   unirest.get(serverurl + '/users/me').headers({
     'X-Parse-Application-Id': process.env.APP_ID || 'myAppId',
     'X-Parse-Session-Token': req.session.token,
@@ -68,11 +66,9 @@ function isLoggedIn(req, res, next) {
   }).send({}).end(function(userData) {
     if (userData.status == 200) {
       req.user = Parse.Object.fromJSON(userData.body);
-      console.log("did it work?");
-      console.log(req.user);
       next();
     } else {
-	  console.log(userData);
+	  res.redirect('/login');
     }
   });
 }
@@ -107,7 +103,7 @@ app.get('/register', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/register.html'));
 });
 
-app.get('/admin', function(req, res) {
+app.get('/admin', isLoggedIn, function(req, res) {
   res.sendFile(path.join(__dirname, '/public/admin.html'));
 });
 
