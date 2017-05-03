@@ -4,7 +4,10 @@
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+var session = require('express-session');
+var MongoDBStore = require('connect-mongodb-session')(session);
+var unirest = require('unirest');
 
 var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
 
@@ -16,7 +19,7 @@ var api = new ParseServer({
   databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || 'myAppId',
-  masterKey: process.env.MASTER_KEY || '', //Add your master key here. Keep it secret!
+  masterKey: process.env.MASTER_KEY || 'Fhr8Q9SD^wSfe', //Add your master key here. Keep it secret!
   serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
@@ -31,7 +34,20 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
-})); 
+}));
+
+var store = new MongoDBStore({
+  uri: databaseUri || 'mongodb://localhost:27017/dev',
+  collection: 'sessions'
+});
+
+app.use(session({
+  secret: '??????????',
+  cookie: {},
+  store: store,
+  resave: true,
+  saveUninitialized: true
+}));
 
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
@@ -41,21 +57,53 @@ var mountPath = process.env.PARSE_MOUNT || '/parse';
 app.use(mountPath, api);
 
 
+function isLoggedIn(req, res, next) {
+  var serverurl = process.env.SERVER_URL || 'http://localhost:1337/parse';
+  unirest.get(serverurl + '/users/me').headers({
+    'X-Parse-Application-Id': process.env.APP_ID || 'myAppId',
+    'X-Parse-Session-Token': req.session.token,
+    'X-Parse-REST-API-Key': process.env.MASTER_KEY || 'Fhr8Q9SD^wSfe'
+  }).send({}).end(function(userData) {
+    if (userData.status == 200) {
+      req.user = userData.body;
+      next();
+    } else {
+	  res.redirect('/login');
+    }
+  });
+}
+
+function isAdmin(req, res, next) {
+  if(req.user.email == "kerri_hayes@brown.edu") {
+    next();
+  } else {
+    res.redirect('/adminlogin');
+  }
+}
+
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/landing.html'));
 });
 
-app.get('/welcome', function(req, res) {
+app.get('/welcome', isLoggedIn, function(req, res) {
   res.sendFile(path.join(__dirname, '/public/welcome.html'));
 });
 
 app.get('/login', function(req, res) {
+  req.session.token = null;
   res.sendFile(path.join(__dirname, '/public/login.html'));
 });
 
 app.post('/login', function(req, res) {
-  Parse.Cloud.run('logIn', {email: req.body.email, password: req.body.password}).then(function(loginResponse) {
-    res.redirect('/welcome');
+  Parse.Cloud.run('logIn', {email: req.body.email, password: req.body.password}, {
+    success: function(user) {
+      req.session.token = user.getSessionToken();
+      res.redirect('/welcome');
+    },
+    error: function(error) {
+      console.log(error);
+      res.redirect('/login');
+    },
   });
 });
 
@@ -63,7 +111,7 @@ app.get('/register', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/register.html'));
 });
 
-app.get('/admin', function(req, res) {
+app.get('/admin', isLoggedIn, isAdmin, function(req, res) {
   res.sendFile(path.join(__dirname, '/public/admin.html'));
 });
 
@@ -72,14 +120,28 @@ app.get('/adminlogin', function(req, res) {
 });
 
 app.post('/adminlogin', function(req, res) {
-  Parse.Cloud.run('adminLogIn', {email: req.body.email, password: req.body.password}).then(function(loginResponse) {
-    res.redirect('/admin');
+  Parse.Cloud.run('adminLogIn', {email: req.body.email, password: req.body.password}, {
+    success: function(user) {
+      req.session.token = user.getSessionToken();
+      res.redirect('/admin');
+    },
+    error: function(error) {
+      console.log(error);
+      res.redirect('/adminlogin');
+    },
   });
 });
 
 app.post('/signup', function(req, res) {
-  Parse.Cloud.run('signUp', {email: req.body.email, password: req.body.password}).then(function(signupResponse) {
-    res.redirect('https://brown.co1.qualtrics.com/jfe/form/SV_6KeyGldHYVWIKln');
+  Parse.Cloud.run('signUp', {email: req.body.email, password: req.body.password}, {
+    success: function(user) {
+      req.session.token = user.getSessionToken();
+      res.redirect('https://brown.co1.qualtrics.com/jfe/form/SV_6KeyGldHYVWIKln');
+    },
+    error: function(error) {
+      console.log(error);
+      res.redirect('/register');
+    },
   });
 });
 
