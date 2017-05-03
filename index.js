@@ -66,7 +66,6 @@ function isLoggedIn(req, res, next) {
   }).send({}).end(function(userData) {
     if (userData.status == 200) {
       req.user = userData.body;
-      console.log("username: " + req.user.username);
       next();
     } else {
 	  res.redirect('/login');
@@ -74,12 +73,19 @@ function isLoggedIn(req, res, next) {
   });
 }
 
+function isAdmin(req, res, next) {
+  if(req.user.email == "kerri_hayes@brown.edu") {
+    next();
+  } else {
+    res.redirect('/adminlogin');
+  }
+}
+
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/landing.html'));
 });
 
 app.get('/welcome', isLoggedIn, function(req, res) {
-  console.log("test:");
   res.sendFile(path.join(__dirname, '/public/welcome.html'));
 });
 
@@ -105,7 +111,7 @@ app.get('/register', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/register.html'));
 });
 
-app.get('/admin', isLoggedIn, function(req, res) {
+app.get('/admin', isLoggedIn, isAdmin, function(req, res) {
   res.sendFile(path.join(__dirname, '/public/admin.html'));
 });
 
