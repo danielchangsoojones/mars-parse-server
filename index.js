@@ -65,6 +65,7 @@ function isLoggedIn(req, res, next) {
     'X-Parse-REST-API-Key': process.env.MASTER_KEY || 'Fhr8Q9SD^wSfe'
   }).send({}).end(function(userData) {
     if (userData.status == 200) {
+      console.log(userData);
       req.user = Parse.Object.fromJSON(userData.body);
       next();
     } else {
@@ -83,6 +84,7 @@ app.get('/welcome', isLoggedIn, function(req, res) {
 });
 
 app.get('/login', function(req, res) {
+  req.session.token = null;
   res.sendFile(path.join(__dirname, '/public/login.html'));
 });
 
@@ -126,6 +128,7 @@ app.post('/adminlogin', function(req, res) {
 app.post('/signup', function(req, res) {
   Parse.Cloud.run('signUp', {email: req.body.email, password: req.body.password}, {
     success: function(user) {
+      req.session.token = user.getSessionToken();
       res.redirect('https://brown.co1.qualtrics.com/jfe/form/SV_6KeyGldHYVWIKln');
     },
     error: function(error) {
