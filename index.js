@@ -65,7 +65,7 @@ function isLoggedIn(req, res, next) {
     'X-Parse-REST-API-Key': process.env.MASTER_KEY || 'Fhr8Q9SD^wSfe'
   }).send({}).end(function(userData) {
     if (userData.status == 200) {
-      req.user = JSON.parse(userData.body);
+      req.user = userData.body;
       console.log("username: " + req.user.username);
       next();
     } else {
