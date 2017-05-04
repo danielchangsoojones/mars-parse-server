@@ -21,7 +21,7 @@ body {
 .form-field {
 	height: 30px;
 	width: 350px;
-	max-width: 100%;
+	max-width: 90%;
 	font-size: 18pt;
 	border-radius: 5px;
 }
