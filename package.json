@@ -16,7 +16,8 @@
     "body-parser": "*",
     "express-session": "*",
     "connect-mongodb-session": "*",
-    "unirest": "*"
+    "unirest": "*",
+    "mailgun-js": "*"
   },
   "scripts": {
     "start": "node index.js"
