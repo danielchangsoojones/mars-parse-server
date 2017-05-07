@@ -31,6 +31,7 @@
 	text-align: center;
 	text-decoration: none;
 	border-radius: 10px;
+	cursor: pointer;
 }
 
 canvas {
@@ -65,5 +66,5 @@ canvas {
 #overlay-content {
 	width: 600px;
 	max-width: 90%;
-	margin: 0px auto;
+	margin: 20px auto;
 }
