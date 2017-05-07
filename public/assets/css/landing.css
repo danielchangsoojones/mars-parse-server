@@ -86,3 +86,10 @@ button{
   font-size: 16px;
   margin: 4px 2px;
 }
+
+#privacy-policy {
+    display: block;
+    margin: auto;
+    width: 50%;
+    color: white;
+}
