@@ -28,8 +28,8 @@
 			<h2>
 				Screening Survey
 			</h2>
-			<a href="https://brown.co1.qualtrics.com/jfe/form/SV_cUVhrX1McSnZ0nH" class="details-link">
-				preview survey
+			<a href="admin.html" class="details-link">
+				see details
 			</a>
 			<canvas id="screeningChart" width="250" height="250"></canvas>
 			<p>
@@ -41,15 +41,15 @@
 			<h2>
 				Consent Form
 			</h2>
-			<a href="https://brown.co1.qualtrics.com/jfe/form/SV_4JG3df3bAh8L8kB" class="details-link">
-				preview survey
+			<a href="admin.html" class="details-link">
+				see details
 			</a>
 			<canvas id="consentChart" width="250" height="250"></canvas>
 			<p>
 				80 complete<br/>
 				20 incomplete
 			</p>
-			<a class="reminder-button">
+			<a href="admin.html" class="reminder-button">
 				send mass reminder message
 			</a>
 		</div>
@@ -57,39 +57,17 @@
 			<h2>
 				Main Survey
 			</h2>
-			<a href="https://brown.co1.qualtrics.com/jfe/form/SV_cZuQxGIUNNktNWZ" class="details-link">
-				preview survey
+			<a href="admin.html" class="details-link">
+				see details
 			</a>
 			<canvas id="mainSurveyChart" width="250" height="250"></canvas>
 			<p>
 				55 complete<br/>
 				30 incomplete
 			</p>
-			<a class="reminder-button">
+			<a href="admin.html" class="reminder-button">
 				send mass reminder message
 			</a>
-		</div>
-	</div>
-	<div id="overlay">
-		<div id="overlay-popup">
-			<div id="overlay-content">
-				<h2>Send Reminder</h2>
-				<form id="reminder-form" method="POST" action="sendreminder">
-				<div class="form-item">
-					subject<br/>
-					<input type="text" name="subject" class="form-field" id="subject-field" />
-					<div class="form-error" id="subject-error"></div>
-				</div>
-				<div class="form-item">
-					message<br/>
-					<textarea name="message" class="form-textarea" id="message-field"></textarea>
-					<div class="form-error" id="message-error"></div>
-				</div>
-				<div class="form-item">
-					<input type="submit" value="send reminder" /><input type="button" value="cancel" id="cancel-button" />
-				</div>
-				</form>
-			</div>
 		</div>
 	</div>
 	<div id="footer">
