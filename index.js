@@ -59,9 +59,9 @@ db.once('open', function() {
 
   var SurveyCompletion = mongoose.model('SurveyCompletion', surveyCompletionSchema);
   
-  var testCompletion = new SurveyCompletion({email: "lucas_priebe@brown.edu", screening: true, consent: true, main: false});
+  var testCompletion = new SurveyCompletion({email: "daniel_jones@brown.edu", screening: true, consent: false, main: false});
   testCompletion.save(function(err) {
-  	console.log(err);
+  	if(err) console.log(err);
   });
 });
 mongoose.connect(databaseUri);
