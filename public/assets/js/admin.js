@@ -6,7 +6,14 @@ $(document).ready(function(){
 	var mainSurveyData = [{name: "complete", count: 55, color: "#6DB1A5"}, {name: "incomplete", count: 30, color: "#4A514B"}];
 	drawChart(document.getElementById("mainSurveyChart"), mainSurveyData);
 	
-	$('.reminder-button').click(openOverlay);
+	$('#consent-reminder').click(function() {
+	  $('#survey-field').val("consent");
+	  openOverlay();
+	});
+	$('#main-reminder').click(function() {
+	  $('#survey-field').val("main");
+	  openOverlay();
+	});
 	$('#cancel-button').click(closeOverlay);
 });
 

@@ -14,19 +14,6 @@ var mailgun = require('mailgun-js')({apiKey: mailgun_api_key, domain: mailgun_do
 var mongoose = require('mongoose');
 mongoose.Promise = require('es6-promise').Promise;
 
-/*
-var maildata = {
-  from: 'Mailgun Test Sender <noreply@sandbox6397671ea3094abda6a3af154dc62eaf.mailgun.org>',
-  to: 'lucas_priebe@brown.edu',
-  subject: 'Mailgun test',
-  text: 'Mailgun test.'
-};
- 
-mailgun.messages().send(maildata, function (error, body) {
-  console.log(body);
-});
-*/
-
 var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
 
 if (!databaseUri) {
@@ -49,22 +36,22 @@ var api = new ParseServer({
 
 var db = mongoose.connection;
 db.on('error', console.error);
-db.once('open', function() {
-  var surveyCompletionSchema = new mongoose.Schema({
-    email: String,
-    screening: Boolean,
-    consent: Boolean,
-    main: Boolean
-  });
-
-  var SurveyCompletion = mongoose.model('SurveyCompletion', surveyCompletionSchema);
-  
+/*
+db.once('open', function() {  
   var testCompletion = new SurveyCompletion({email: "daniel_jones@brown.edu", screening: true, consent: false, main: false});
   testCompletion.save(function(err) {
   	if(err) console.log(err);
   });
 });
+*/
 mongoose.connect(databaseUri);
+var surveyCompletionSchema = new mongoose.Schema({
+  email: String,
+  screening: Boolean,
+  consent: Boolean,
+  main: Boolean
+});
+var SurveyCompletion = mongoose.model('SurveyCompletion', surveyCompletionSchema);
 
 var app = express();
 
@@ -116,6 +103,28 @@ function isAdmin(req, res, next) {
   } else {
     res.redirect('/adminlogin');
   }
+}
+
+function sendReminderEmail(survey, subject, body) {
+  var condition = {};
+  condition[survey] = false;
+  SurveyCompletion.find(condition, function(err, users) {
+    if(err) {
+      console.log(err);
+    }
+    for(user in users) {
+	  var maildata = {
+        from: 'Project SAM <noreply@sandbox6397671ea3094abda6a3af154dc62eaf.mailgun.org>',
+        to: user.email,
+        subject: subject,
+        text: body
+      };
+ 
+      mailgun.messages().send(maildata, function (error, body) {
+        console.log(body);
+      });
+    }
+  });
 }
 
 app.get('/', function(req, res) {
@@ -180,6 +189,11 @@ app.post('/signup', function(req, res) {
       res.redirect('/register');
     },
   });
+});
+
+app.post('/sendreminder', isLoggedIn, isAdmin, function(req, res) {
+  sendReminderEmail(req.body.survey, req.body.subject, req.body.message);
+  res.redirect("/admin");
 });
 
 var port = process.env.PORT || 1337;
