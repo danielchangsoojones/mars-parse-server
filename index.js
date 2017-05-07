@@ -12,13 +12,14 @@ var mailgun_domain = "sandbox6397671ea3094abda6a3af154dc62eaf.mailgun.org";
 var mailgun_api_key = "key-2ae9b07c4828f29a10980aea8f37805c";
 var mailgun = require('mailgun-js')({apiKey: mailgun_api_key, domain: mailgun_domain});
 
-var data = {
+var maildata = {
+  from: 'Mailgun Test Sender <noreply@sandbox6397671ea3094abda6a3af154dc62eaf.mailgun.org>',
   to: 'lucas_priebe@brown.edu',
   subject: 'Mailgun test',
   text: 'Mailgun test.'
 };
  
-mailgun.messages().send(data, function (error, body) {
+mailgun.messages().send(maildata, function (error, body) {
   console.log(body);
 });
 
