@@ -148,12 +148,12 @@ app.get('/', function(req, res) {
 });
 
 app.get('/welcome', isLoggedIn, function(req, res) {
-  res.sendFile(path.join(__dirname, '/public/welcome.html'));
+  res.render('welcome.html', {email: req.user.email});
 });
 
 app.get('/login', function(req, res) {
   req.session.token = null;
-  res.sendFile(path.join(__dirname, '/public/login.html'));
+  res.render('login.html', {});
 });
 
 app.post('/login', function(req, res) {
@@ -170,15 +170,15 @@ app.post('/login', function(req, res) {
 });
 
 app.get('/register', function(req, res) {
-  res.sendFile(path.join(__dirname, '/public/register.html'));
+  res.render('register.html', {});
 });
 
 app.get('/admin', isLoggedIn, isAdmin, function(req, res) {
-  res.sendFile(path.join(__dirname, '/public/admin.html'));
+  res.render('admin.html', getSurveyCompletions());
 });
 
 app.get('/adminlogin', function(req, res) {
-  res.sendFile(path.join(__dirname, '/public/adminlogin.html'));
+  res.render('adminlogin.html', {});
 });
 
 app.post('/adminlogin', function(req, res) {
