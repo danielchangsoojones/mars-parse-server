@@ -124,25 +124,6 @@ function sendReminderEmail(survey, subject, body) {
   });
 }
 
-function getSurveyCompletions() {
-  var completions = {total: 0, consent: 0, main: 0};
-  SurveyCompletion.find({ screening: true }).then(function(err, users) {
-    if(err) {
-      console.log(err);
-    }
-    users.forEach(function(user) {
-      completions.total += 1;
-      if(user.consent) {
-	    completions.consent += 1;
-      }
-      if(user.main) {
-	    completions.main += 1;
-      }
-    });
-    return completions;
-  });
-}
-
 app.get('/', function(req, res) {
   res.render('landing.html', {});
 });
@@ -174,7 +155,22 @@ app.get('/register', function(req, res) {
 });
 
 app.get('/admin', isLoggedIn, isAdmin, function(req, res) {
-  res.render('admin.html', getSurveyCompletions());
+  SurveyCompletion.find({ screening: true }).then(function(err, users) {
+    if(err) {
+      console.log(err);
+    }
+    var completions = {total: 0, consent: 0, main: 0};
+    users.forEach(function(user) {
+      completions.total += 1;
+      if(user.consent) {
+	    completions.consent += 1;
+      }
+      if(user.main) {
+	    completions.main += 1;
+      }
+    });
+    res.render('admin.html', completions);
+  });
 });
 
 app.get('/adminlogin', function(req, res) {
