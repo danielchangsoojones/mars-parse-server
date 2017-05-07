@@ -36,14 +36,7 @@ var api = new ParseServer({
 
 var db = mongoose.connection;
 db.on('error', console.error);
-/*
-db.once('open', function() {  
-  var testCompletion = new SurveyCompletion({email: "daniel_jones@brown.edu", screening: true, consent: false, main: false});
-  testCompletion.save(function(err) {
-  	if(err) console.log(err);
-  });
-});
-*/
+
 mongoose.connect(databaseUri);
 var surveyCompletionSchema = new mongoose.Schema({
   email: String,
