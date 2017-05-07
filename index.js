@@ -106,9 +106,12 @@ function isAdmin(req, res, next) {
 }
 
 function sendReminderEmail(survey, subject, body) {
+  console.log("sending reminders...");
   var condition = {};
   condition[survey] = false;
+  console.log(condition);
   SurveyCompletion.find(condition, function(err, users) {
+    console.log(users);
     if(err) {
       console.log(err);
     }
