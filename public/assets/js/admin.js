@@ -1,7 +1,7 @@
 $(document).ready(function(){
-	var total = document.querySelector('meta[name=total]').content;
-	var consent = document.querySelector('meta[name=consent]').content;
-	var main = document.querySelector('meta[name=main]').content;
+	var total = parseInt(document.querySelector('meta[name=total]').content);
+	var consent = parseInt(document.querySelector('meta[name=consent]').content);
+	var main = parseInt(document.querySelector('meta[name=main]').content);
 	
 	var screeningData = [{name: "invited", count: total, color: "#6DB1A5"}, {name: "remaining", count: Math.max(100 - total, 0), color: "#4A514B"}];
 	drawChart(document.getElementById("screeningChart"), screeningData);
