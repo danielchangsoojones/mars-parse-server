@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var MongoDBStore = require('connect-mongodb-session')(session);
 var unirest = require('unirest');
+var engines = require('consolidate');
 var mailgun_domain = "sandbox6397671ea3094abda6a3af154dc62eaf.mailgun.org";
 var mailgun_api_key = "key-2ae9b07c4828f29a10980aea8f37805c";
 var mailgun = require('mailgun-js')({apiKey: mailgun_api_key, domain: mailgun_domain});
@@ -68,6 +69,9 @@ app.use(session({
 
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
+app.engine('html', engines.hogan);
+app.set('views', __dirname + '/public');
+app.set('view engine', 'html');
 
 // Serve the Parse API on the /parse URL prefix
 var mountPath = process.env.PARSE_MOUNT || '/parse';
@@ -140,7 +144,7 @@ function getSurveyCompletions() {
 }
 
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, '/public/landing.html'));
+  res.render('landing.html', {});
 });
 
 app.get('/welcome', isLoggedIn, function(req, res) {

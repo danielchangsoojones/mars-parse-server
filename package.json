@@ -19,7 +19,9 @@
     "unirest": "*",
     "mailgun-js": "*",
     "mongoose": "*",
-    "es6-promise": "*"
+    "es6-promise": "*",
+    "consolidate": "^0.14.5",
+    "hogan.js": "^3.0.2"
   },
   "scripts": {
     "start": "node index.js"
