@@ -46,7 +46,7 @@ var api = new ParseServer({
 // javascriptKey, restAPIKey, dotNetKey, clientKey
 
 var mongoose = require('mongoose');
-mongoose.Promise = require('es6-promise');
+mongoose.Promise = require('es6-promise').Promise;
 var db = mongoose.connection;
 db.on('error', console.error);
 db.once('open', function() {
