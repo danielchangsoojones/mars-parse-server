@@ -106,16 +106,14 @@ function isAdmin(req, res, next) {
 }
 
 function sendReminderEmail(survey, subject, body) {
-  console.log("sending reminders...");
   var condition = {};
   condition[survey] = false;
-  console.log(condition);
   SurveyCompletion.find(condition, function(err, users) {
-    console.log(users);
     if(err) {
       console.log(err);
     }
     for(user in users) {
+      console.log(user.email);
 	  var maildata = {
         from: 'Project SAM <noreply@sandbox6397671ea3094abda6a3af154dc62eaf.mailgun.org>',
         to: user.email,
