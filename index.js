@@ -46,15 +46,6 @@ var surveyCompletionSchema = new mongoose.Schema({
 });
 var SurveyCompletion = mongoose.model('SurveyCompletion', surveyCompletionSchema);
 
-for(i = 0; i < 98; i++) {
-	var r = Math.random();
-	
-	var testCompletion = new SurveyCompletion({email: "account" + r+ "@fakeschool.edu", screening: true, consent: (r < 0.8), main: (r < 0.55)});
-		testCompletion.save(function(err) {
-			if(err) console.log(err);
-		});
-}
-
 var app = express();
 
 app.use(bodyParser.json());
