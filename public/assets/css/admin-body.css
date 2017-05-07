@@ -43,7 +43,7 @@ canvas {
 	margin-top: 20px;
 }
 
-.form-field, form-textarea {
+.form-field, .form-textarea {
 	font-size: 18pt;
 	border-radius: 5px;
 }
