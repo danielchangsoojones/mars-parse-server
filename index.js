@@ -155,10 +155,11 @@ app.get('/register', function(req, res) {
 });
 
 app.get('/admin', isLoggedIn, isAdmin, function(req, res) {
-  SurveyCompletion.find({ screening: true }).then(function(err, users) {
+  SurveyCompletion.find({ screening: true }, function(err, users) {
     if(err) {
       console.log(err);
     }
+    console.log("test: found users");
     var completions = {total: 0, consent: 0, main: 0};
     users.forEach(function(user) {
       completions.total += 1;
