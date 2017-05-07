@@ -112,7 +112,7 @@ function sendReminderEmail(survey, subject, body) {
     if(err) {
       console.log(err);
     }
-    for(user in users) {
+    users.forEach(function(user) {
       console.log(user);
 	  var maildata = {
         from: 'Project SAM <noreply@sandbox6397671ea3094abda6a3af154dc62eaf.mailgun.org>',
@@ -124,7 +124,7 @@ function sendReminderEmail(survey, subject, body) {
       mailgun.messages().send(maildata, function (error, body) {
         console.log(body);
       });
-    }
+    });
   });
 }
 
