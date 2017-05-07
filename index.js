@@ -106,7 +106,6 @@ function sendReminderEmail(survey, subject, body) {
       console.log(err);
     }
     users.forEach(function(user) {
-      console.log(user);
 	  var maildata = {
         from: 'Project SAM <noreply@sandbox6397671ea3094abda6a3af154dc62eaf.mailgun.org>',
         to: user.email,
@@ -118,6 +117,25 @@ function sendReminderEmail(survey, subject, body) {
         console.log(body);
       });
     });
+  });
+}
+
+function getSurveyCompletions() {
+  var completions = {total: 0, consent: 0, main: 0};
+  SurveyCompletion.find({ screening: true }).then(function(err, users) {
+    if(err) {
+      console.log(err);
+    }
+    users.forEach(function(user) {
+      completions.total += 1;
+      if(user.consent) {
+	    completions.consent += 1;
+      }
+      if(user.main) {
+	    completions.main += 1;
+      }
+    });
+    return completions;
   });
 }
 
