@@ -1,9 +1,13 @@
 $(document).ready(function(){
-	var screeningData = [{name: "invited", count: 100, color: "#6DB1A5"}, {name: "remaining", count: 0, color: "#4A514B"}];
+	var total = document.querySelector('meta[name=total]').content;
+	var consent = document.querySelector('meta[name=consent]').content;
+	var main = document.querySelector('meta[name=main]').content;
+	
+	var screeningData = [{name: "invited", count: total, color: "#6DB1A5"}, {name: "remaining", count: Math.max(100 - total, 0), color: "#4A514B"}];
 	drawChart(document.getElementById("screeningChart"), screeningData);
-	var consentData = [{name: "complete", count: 80, color: "#6DB1A5"}, {name: "incomplete", count: 20, color: "#4A514B"}];
+	var consentData = [{name: "complete", count: consent, color: "#6DB1A5"}, {name: "incomplete", count: total-consent, color: "#4A514B"}];
 	drawChart(document.getElementById("consentChart"), consentData);
-	var mainSurveyData = [{name: "complete", count: 55, color: "#6DB1A5"}, {name: "incomplete", count: 30, color: "#4A514B"}];
+	var mainSurveyData = [{name: "complete", count: main, color: "#6DB1A5"}, {name: "incomplete", count: total-main, color: "#4A514B"}];
 	drawChart(document.getElementById("mainSurveyChart"), mainSurveyData);
 	
 	$('#consent-reminder').click(function() {

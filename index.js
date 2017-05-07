@@ -170,6 +170,8 @@ app.get('/admin', isLoggedIn, isAdmin, function(req, res) {
 	    completions.main += 1;
       }
     });
+    completions.noconsent = completions.total - completions.consent;
+    completions.nomain = completions.total - completions.main;
     res.render('admin.html', completions);
   });
 });

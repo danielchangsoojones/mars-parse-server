@@ -37,7 +37,7 @@
 			<canvas id="screeningChart" width="250" height="250"></canvas>
 			<p>
 				137 complete<br/>
-				100 invited
+				{{total}} invited
 			</p>
 		</div>
 		<div class="survey-data">
@@ -49,8 +49,8 @@
 			</a>
 			<canvas id="consentChart" width="250" height="250"></canvas>
 			<p>
-				80 complete<br/>
-				20 incomplete
+				{{consent}} complete<br/>
+				{{noconsent}} incomplete
 			</p>
 			<a class="reminder-button" id="consent-reminder">
 				send mass reminder message
@@ -65,8 +65,8 @@
 			</a>
 			<canvas id="mainSurveyChart" width="250" height="250"></canvas>
 			<p>
-				55 complete<br/>
-				30 incomplete
+				{{main}} complete<br/>
+				{{nomain}} incomplete
 			</p>
 			<a class="reminder-button" id="main-reminder">
 				send mass reminder message
