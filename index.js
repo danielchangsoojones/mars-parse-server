@@ -36,14 +36,7 @@ var api = new ParseServer({
 
 var db = mongoose.connection;
 db.on('error', console.error);
-/*
-db.once('open', function() {  
-  var testCompletion = new SurveyCompletion({email: "daniel_jones@brown.edu", screening: true, consent: false, main: false});
-  testCompletion.save(function(err) {
-  	if(err) console.log(err);
-  });
-});
-*/
+
 mongoose.connect(databaseUri);
 var surveyCompletionSchema = new mongoose.Schema({
   email: String,
@@ -52,6 +45,15 @@ var surveyCompletionSchema = new mongoose.Schema({
   main: Boolean
 });
 var SurveyCompletion = mongoose.model('SurveyCompletion', surveyCompletionSchema);
+
+for(int i = 0; i < 98; i++) {
+	var r = Math.random();
+	
+	var testCompletion = new SurveyCompletion({email: "account" + r+ "@fakeschool.edu", screening: true, consent: (r < 0.8), main: (r < 0.55)});
+		testCompletion.save(function(err) {
+			if(err) console.log(err);
+		});
+}
 
 var app = express();
 
