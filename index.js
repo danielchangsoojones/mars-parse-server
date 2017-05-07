@@ -11,6 +11,8 @@ var unirest = require('unirest');
 var mailgun_domain = "sandbox6397671ea3094abda6a3af154dc62eaf.mailgun.org";
 var mailgun_api_key = "key-2ae9b07c4828f29a10980aea8f37805c";
 var mailgun = require('mailgun-js')({apiKey: mailgun_api_key, domain: mailgun_domain});
+var mongoose = require('mongoose');
+mongoose.Promise = require('es6-promise').Promise;
 
 /*
 var maildata = {
@@ -45,12 +47,22 @@ var api = new ParseServer({
 // If you wish you require them, you can set them as options in the initialization above:
 // javascriptKey, restAPIKey, dotNetKey, clientKey
 
-var mongoose = require('mongoose');
-mongoose.Promise = require('es6-promise').Promise;
 var db = mongoose.connection;
 db.on('error', console.error);
 db.once('open', function() {
-  console.log("Connected to DB!");
+  var surveyCompletionSchema = new mongoose.Schema({
+    email: String,
+    screening: Boolean,
+    consent: Boolean,
+    main: Boolean
+  });
+
+  var SurveyCompletion = mongoose.model('SurveyCompletion', surveyCompletionSchema);
+  
+  var testCompletion = new SurveyCompletion({email: "lucas_priebe@brown.edu", screening: true, consent: true, main: false});
+  testCompletion.save(function(err) {
+  	console.log(err);
+  });
 });
 mongoose.connect(databaseUri);
 
