@@ -43,16 +43,23 @@ canvas {
 	margin-top: 20px;
 }
 
-.form-field {
-	height: 30px;
-	width: 350px;
-	max-width: 90%;
+.form-field, form-textarea {
 	font-size: 18pt;
 	border-radius: 5px;
 }
 
+.form-field {
+	height: 30px;
+	width: 350px;
+	max-width: 90%;
+}
+
 .form-error {
 	color: #FFFFFF;
+}
+
+.form-textarea {
+	width: 100%;
 }
 
 /* OVERLAY */
@@ -66,7 +73,7 @@ canvas {
 	display: none;
 }
 
-#overlay-content {
+#overlay-popup {
 	position: absolute;
 	left: 10%;
 	top: 10%;
@@ -75,4 +82,10 @@ canvas {
 	background-color: #6DB1A5;
 	border: 1px solid #000000;
 	border-radius: 10px;
+}
+
+#overlay-content {
+	width: 600px;
+	max-width: 90%;
+	margin: 0px auto;
 }
