@@ -63,3 +63,28 @@ h2 {
 	height: 50px;
 	width: 100%;
 }
+
+/* FORMS */
+.form-item {
+	margin-top: 20px;
+}
+
+.form-field, .form-textarea {
+	font-size: 18pt;
+	border-radius: 5px;
+}
+
+.form-field {
+	height: 30px;
+	width: 350px;
+	max-width: 90%;
+}
+
+.form-error {
+	color: #FFFFFF;
+}
+
+.form-textarea {
+	width: 100%;
+	height: 500px;
+}

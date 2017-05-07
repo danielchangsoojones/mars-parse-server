@@ -73,6 +73,7 @@
 	<div id="overlay">
 		<div id="overlay-popup">
 			<div id="overlay-content">
+				<h1>Send Reminder</h1>
 				<form id="reminder-form" method="POST" action="sendreminder">
 				<div class="form-item">
 					subject<br/>
@@ -82,8 +83,10 @@
 				<div class="form-item">
 					message<br/>
 					<textarea name="message" class="form-textarea" id="message-field"></textarea>
-					<input type="submit" class="arrow-button" value=""></input>
 					<div class="form-error" id="message-error"></div>
+				</div>
+				<div class="form-item">
+					<input type="submit" value="send reminder" /><input type="button" value="cancel" id="cancel-button" />
 				</div>
 				</form>
 			</div>

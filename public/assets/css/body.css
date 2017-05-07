@@ -12,20 +12,3 @@ body {
 #content h2 {
 	color: #FFFFFF;
 }
-
-/* FORMS */
-.form-item {
-	margin-top: 20px;
-}
-
-.form-field {
-	height: 30px;
-	width: 350px;
-	max-width: 90%;
-	font-size: 18pt;
-	border-radius: 5px;
-}
-
-.form-error {
-	color: #FFFFFF;
-}

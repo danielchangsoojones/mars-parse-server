@@ -7,6 +7,7 @@ $(document).ready(function(){
 	drawChart(document.getElementById("mainSurveyChart"), mainSurveyData);
 	
 	$('.reminder-button').click(openOverlay);
+	$('#cancel-button').click(closeOverlay);
 });
 
 function drawChart(canvas, values) {
