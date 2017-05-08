@@ -197,6 +197,10 @@ app.post('/adminlogin', function(req, res) {
 app.post('/signup', function(req, res) {
   Parse.Cloud.run('signUp', {email: req.body.email, password: req.body.password}, {
     success: function(user) {
+      var completion = new SurveyCompletion({ email: req.body.email, screening: false, consent: false, main: false });
+  	  completion.save(function (err) {
+	    if (err) console.log(err);
+      });
       req.session.token = user.getSessionToken();
       res.redirect('https://brown.co1.qualtrics.com/jfe/form/SV_6KeyGldHYVWIKln');
     },
@@ -212,10 +216,13 @@ app.post('/sendreminder', isLoggedIn, isAdmin, function(req, res) {
   res.redirect("/admin");
 });
 
-app.post('/surveycomplete', function(req, res) {
-  console.log("Will it happen?");
-  console.log(req.email);
-  res.end();
+app.get('/surveycomplete/:survey/:email', function(req, res) {
+  var update = {};
+  update[req.params.survey] = true;
+  SurveyCompletion.findOneAndUpdate({email: req.body.email}, update, { upsert: true }, function(err) {
+    console.log(err);
+  })
+  res.redirect('/welcome');
 });
 
 var port = process.env.PORT || 1337;
