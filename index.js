@@ -125,7 +125,7 @@ function sendReminderEmail(survey, subject, body) {
 }
 
 app.get('/', function(req, res) {
-  res.render('landing.html', {});
+  res.render('landingalt.html', {});
 });
 
 app.get('/welcome', isLoggedIn, function(req, res) {
@@ -160,19 +160,20 @@ app.get('/admin', isLoggedIn, isAdmin, function(req, res) {
       console.log(err);
     }
     console.log("test: found users");
-    var completions = {total: 0, consent: 0, main: 0};
+    var rendervars = {total: 0, consent: 0, main: 0};
     users.forEach(function(user) {
-      completions.total += 1;
+      rendervars.total += 1;
       if(user.consent) {
-	    completions.consent += 1;
+	    rendervars.consent += 1;
       }
       if(user.main) {
-	    completions.main += 1;
+	    rendervars.main += 1;
       }
     });
-    completions.noconsent = completions.total - completions.consent;
-    completions.nomain = completions.total - completions.main;
-    res.render('admin.html', completions);
+    rendervars.noconsent = rendervars.total - rendervars.consent;
+    rendervars.nomain = rendervars.total - rendervars.main;
+    rendervars.email = req.user.email;
+    res.render('admin.html', rendervars);
   });
 });
 
