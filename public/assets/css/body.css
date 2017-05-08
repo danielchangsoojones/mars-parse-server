@@ -29,3 +29,14 @@ body {
 	background-color: #4A514B;
 	color: #FFFFFF;
 }
+
+#footer-content {
+	max-width: 700px;
+	margin: 50px auto;
+	font-size: 14pt;
+}
+
+#privacy-policy {
+	text-align: center;
+    color: white;
+}
