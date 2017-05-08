@@ -129,12 +129,16 @@ app.get('/', function(req, res) {
 });
 
 app.get('/welcome', isLoggedIn, function(req, res) {
-  res.render('welcome.html', {email: req.user.email});
+  res.render('welcomealt.html', {email: req.user.email});
 });
 
 app.get('/login', function(req, res) {
-  req.session.token = null;
   res.render('login.html', {});
+});
+
+app.get('/logout', function(req, res) {
+  req.session.token = null;
+  res.redirect('/login');
 });
 
 app.post('/login', function(req, res) {
