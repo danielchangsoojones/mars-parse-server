@@ -205,7 +205,7 @@ app.post('/signup', function(req, res) {
 	    if (err) console.log(err);
       });
       req.session.token = user.getSessionToken();
-      res.redirect('https://brown.co1.qualtrics.com/jfe/form/SV_6KeyGldHYVWIKln');
+      res.redirect('https://brown.co1.qualtrics.com/jfe/form/SV_6KeyGldHYVWIKln?email='+req.body.email);
     },
     error: function(error) {
       console.log(error);
