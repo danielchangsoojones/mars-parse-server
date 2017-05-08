@@ -159,7 +159,6 @@ app.get('/admin', isLoggedIn, isAdmin, function(req, res) {
     if(err) {
       console.log(err);
     }
-    console.log("test: found users");
     var rendervars = {total: 0, consent: 0, main: 0};
     users.forEach(function(user) {
       rendervars.total += 1;
@@ -219,10 +218,12 @@ app.post('/sendreminder', isLoggedIn, isAdmin, function(req, res) {
 app.get('/surveycomplete/:survey/:email', function(req, res) {
   var update = {};
   update[req.params.survey] = true;
-  SurveyCompletion.findOneAndUpdate({email: req.body.email}, update, { upsert: true }, function(err) {
+  console.log(update);
+  SurveyCompletion.findOneAndUpdate({email: req.params.email}, update, { upsert: true }, function(err, doc) {
     console.log(err);
+    console.log(doc);
+    res.redirect('/welcome');
   })
-  res.redirect('/welcome');
 });
 
 var port = process.env.PORT || 1337;
