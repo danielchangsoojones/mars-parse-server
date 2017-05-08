@@ -212,6 +212,12 @@ app.post('/sendreminder', isLoggedIn, isAdmin, function(req, res) {
   res.redirect("/admin");
 });
 
+app.post('/surveycomplete', function(req, res) {
+  console.log("Will it happen?");
+  console.log(req.email);
+  res.end();
+});
+
 var port = process.env.PORT || 1337;
 var httpServer = require('http').createServer(app);
 httpServer.listen(port, function() {

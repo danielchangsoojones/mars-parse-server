@@ -23,6 +23,7 @@ body {
 	display: block;
 	font-size: 16px;
 	margin: 60px auto;
+	cursor: pointer;
 }
 
 #landing-footer {
